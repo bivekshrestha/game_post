@@ -35,6 +35,7 @@ class PostController extends AbstractController
     #[Route('/post', name: 'post')]
     public function index(): Response
     {
+        // Fetch blog post data and return it to the view
         return $this->render('post/index.html.twig', [
             'posts' => $this->postRepository->findBy([], ['createdAt' => 'DESC'])
         ]);
@@ -44,12 +45,17 @@ class PostController extends AbstractController
     public function create(Request $request): Response
     {
         $post = new Post();
+
+        // creating form object for Blog form
         $form = $this->createForm(PostFormType::class, $post);
 
+        // handle blog post form request
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
+            // set data from form
             $newPost = $form->getData();
 
+            // persist the blog content in database
             $this->entityManager->persist($newPost);
             $this->entityManager->flush();
 
@@ -64,22 +70,30 @@ class PostController extends AbstractController
     #[Route('/post/{slug}', name: 'post_show')]
     public function show(Request $request, $slug): Response
     {
+        // fetch blog post with slug column from route parameter
         $post = $this->postRepository->findOneBy([
             'slug' => $slug
         ]);
 
-        $comment = new Comment();;
+        $comment = new Comment();
+
+        // create form object for comments
         $form = $this->createForm(CommentFormType::class, $comment);
 
+        // handle add comment request
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
+            // set comment data from form request
             $data = $form->getData();
 
+            // attach post in comment
             $data->setPost($post);
 
+            // persist comment data in database
             $this->entityManager->persist($data);
             $this->entityManager->flush();
 
+            // re-initialize comment object for new comment form to reset it
             $comment = new Comment();;
             $form = $this->createForm(CommentFormType::class, $comment);
         }

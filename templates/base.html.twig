@@ -15,7 +15,7 @@
     {% endblock %}
 </head>
 <body>
-{# Header Start #}
+<!-- Header Start -->
 <header class="text-gray-600 body-font">
     <div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
         <a href="{{ path('app_home') }}" class="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
@@ -40,15 +40,15 @@
         </a>
     </div>
 </header>
-{# Header End #}
+<!-- Header End -->
 
-{# Main Body Start #}
+<!-- Main Body Start -->
 <main style="min-height: 75vh">
     {% block body %}{% endblock %}
 </main>
-{# Main Body End #}
+<!-- Main Body End -->
 
-{# Footer Start #}
+<!-- Footer Start -->
 <footer class="text-gray-600 body-font static bottom-0">
     <div class="container px-5 py-8 mx-auto flex items-center sm:flex-row flex-col">
         <a href="{{ path('app_home') }}" class="flex title-font font-medium items-center md:justify-start justify-center text-gray-900">
@@ -93,6 +93,6 @@
     </span>
     </div>
 </footer>
-{# Footer End #}
+<!-- Footer End -->
 </body>
 </html>
