@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} {{ post.title }} - Blog{% endblock %}
+
+{% block body %}
+    <section class="text-gray-600 body-font">
+        <div class="container px-5 py-10 mx-auto flex items-center md:flex-row flex-col">
+            <div class="flex flex-col md:pr-10 md:mb-0 mb-6 pr-0 w-full md:w-auto md:text-left text-center">
+                <h2 class="text-xs text-indigo-500 tracking-widest font-medium title-font mb-1">SIMPLE BLOG</h2>
+                <h1 class="md:text-3xl text-2xl font-medium title-font text-gray-900">{{ post.title }}</h1>
+                <p class="leading-relaxed mb-3 mt-3">
+                    {{ post.content }}
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section class="text-gray-600 body-font">
+        <div class="container px-5 py-5 mx-auto">
+            <h2 class="md:text-2xl text-xl font-medium title-font text-gray-900 mb-1">Comments</h2>
+            <h2 class="text-s text-indigo-500 tracking-widest font-medium title-font">Add New</h2>
+            <div class="mt-2 mb-5 lg:w-2/6 md:w-1/2">
+                <form
+                        action=""
+                        method="POST"
+                >
+                    {{ form_start(form) }}
+
+                    {{ form_widget(form) }}
+
+                    <button class="text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded"
+                            type="submit">Add
+                    </button>
+
+                    {{ form_end(form) }}
+                </form>
+            </div>
+            <hr>
+            <div class="flex flex-col md:pr-10 md:mb-0 mb-6 pr-0 w-full md:w-auto md:text-left text-center mt-5">
+                {% for comment in post.comments %}
+                    <div class="mb-4 flex-grow sm:text-left text-center mt-6 sm:mt-0">
+                        <h2 class="text-gray-900 text-lg title-font font-medium ">{{ comment.name }}</h2>
+                        <small>{{ comment.createdAt.format('jS M, Y') }}</small>
+                        <p class="leading-relaxed text-base mt-2">{{ comment.content }}</p>
+                    </div>
+                    <hr class="mb-4">
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+{% endblock %}

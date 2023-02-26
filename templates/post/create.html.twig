@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Create Blog{% endblock %}
+
+{% block body %}
+    <section class="container px-5 py-5 mx-auto">
+        <div class="lg:w-2/6 md:w-1/2 ">
+            <h1 class="md:text-3xl text-2xl font-medium title-font text-gray-900 mb-5">Add New Blog</h1>
+            <form
+                    action=""
+                    method="POST"
+            >
+                {{ form_start(form) }}
+
+                {{ form_widget(form) }}
+
+                <button class="text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded"
+                        type="submit">Submit
+                </button>
+                {{ form_end(form) }}
+            </form>
+        </div>
+    </section>
+{% endblock %}
